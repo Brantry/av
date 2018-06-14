@@ -1,0 +1,19 @@
+{
+    "name": "brantry/av",
+    "description": "Tiny MVC framework",
+    "type": "library",
+    "require": {
+        "klein/klein": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3@dev"
+    },
+    "license": "?",
+    "authors": [
+        {
+            "name": "Denzyl Dick",
+            "email": "denzyl@live.nl"
+        }
+    ],
+    "minimum-stability": "dev"
+}
