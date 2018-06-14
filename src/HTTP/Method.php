@@ -6,7 +6,7 @@
  * Time: 16:47
  */
 
-namespace Av\Library\HTTP;
+namespace Av\HTTP;
 
 
 class Method

@@ -1,8 +1,8 @@
 <?php
 
-namespace Av\Library;
+namespace Av;
 
-use Av\Library\Exception\UnknownParameter;
+use Av\Exception\UnknownParameter;
 use Klein\DataCollection\DataCollection;
 use Klein\Exceptions\UnhandledException;
 use Pimple\Container as Pimple;

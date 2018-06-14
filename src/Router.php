@@ -1,6 +1,6 @@
 <?php
 
-namespace Av\Library;
+namespace Av;
 
 use AVException as Exception;
 use Klein;

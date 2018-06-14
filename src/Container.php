@@ -1,9 +1,9 @@
 <?php
 
-namespace Av\Library;
+namespace Av;
 /**
  * Class Container
- * @package Av\Library
+ * @package Av
  */
 class Container
 {

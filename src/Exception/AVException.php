@@ -1,5 +1,5 @@
 <?php
-namespace Av\Library\Exception;
+namespace Av\Exception;
 
 use Exception;
 

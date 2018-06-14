@@ -6,7 +6,7 @@
  * Time: 16:50
  */
 
-namespace Av\Library\HTTP;
+namespace Av\HTTP;
 
 
 class Request

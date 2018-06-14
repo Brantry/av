@@ -1,6 +1,6 @@
 <?php
 
-namespace Av\Library;
+namespace Av;
 
 
 use Dotenv\Dotenv;

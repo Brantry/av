@@ -1,8 +1,8 @@
 <?php
 
-namespace Av\Library\Session;
+namespace Av\Session;
 
-use Av\Library\Message;
+use Av\Message;
 
 class Flash extends Session
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Av\Library\Session;
+namespace Av\Session;
 
 class Session
 {
