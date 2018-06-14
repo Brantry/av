@@ -18,30 +18,23 @@ class Router
      * @var Klein\Klein $klein
      */
     private $klein;
-    /**
-     * @var Container
-     */
-    private $di;
 
     public function __construct()
     {
         $this->klein = Container::get('klein');
-
     }
 
     /**
      * Listen to  all requests
-     * GET,POST,DELETE,HEAD
+     * GET,POST,DELETE,HEAD, ETC
      */
     public function listen()
     {
-        ////?/[:controller]?/?/[:action]?/?/[*:params]?
-        $this->klein->respond("/?/[:controller]?/?/[:action]?/?/[*:params]?", function ($request) {
+        $this->klein->respond("/?/[:controller]?/?/[:action]?/?/[*:params]?", function (Klein\Request $request) {
             $this->initializeController(
                 $request->param('controller', "index"),
                 $request->param('action', 'index')
             );
-
         });
         $this->klein->dispatch();
     }
@@ -53,33 +46,25 @@ class Router
      * @param string $actionParam
      * @return int|Klein\AbstractResponse
      */
-    private function initializeController($controllerParam = "index", $actionParam = "index")
+    private function initializeController($controllerParam = 'index', $actionParam = 'index')
     {
+        $action = (strlen($actionParam) == 0 ? 'index' : $actionParam);
 
-        $action = (strlen($actionParam) == 0 ? "index" : $actionParam);
-        try {
-            $concept_controller = "Av\Controller\\" . ucfirst($controllerParam);
-            $concept_action = "{$action}Action";
+        $class = ucfirst($controllerParam);
+        $controller = "Av\Controller\{$class";
+        $action = "{$action}Action";
+        if (class_exists($controller)) {
 
-            if (class_exists($concept_controller)) {
+            /** @var Controller $instance */
+            $instance = new $controller();
 
-                $instance = new $concept_controller();
-
-
-                $action = method_exists($instance, $concept_action) ? $concept_action : "indexAction";
-                method_exists($instance, 'initialize') ? $instance->initialize() : "";
-                $instance->setController(get_class($instance));
-                $instance->setAction($action);
-                $instance->$action();
-            } else {
-                return $this->klein->response()->code(404);
-            }
-
-        } catch (Exception $e) {
-
-            echo $e->getMessage();
+            $action = method_exists($instance, $action) ? $action : 'indexAction';
+            method_exists($instance, 'initialize') ? $instance->initialize() : null;
+            $instance->setController(get_class($instance));
+            $instance->setAction($action);
+            $instance->$action();
+        } else {
+            return $this->klein->response()->code(404);
         }
     }
-
-
 }
