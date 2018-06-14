@@ -1,0 +1,9 @@
+### Composer ###
+vendor/
+composer.lock
+### Phpstorm ###
+.idea/
+### Cache folder ###
+cache/*
+### Composer.phar###
+composer.phar
