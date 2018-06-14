@@ -2,9 +2,6 @@
 
 namespace Av;
 
-
-use Dotenv\Dotenv;
-
 class Application
 {
     private $router;
