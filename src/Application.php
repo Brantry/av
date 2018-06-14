@@ -14,7 +14,7 @@ class Application
 
     /**
      * Enable PHP error reporting
-     * @param bool $html
+     * @param bool $html Should display html formatted errors.
      * @return Application
      */
     public function enableErrorReporting(bool $html = false): self
