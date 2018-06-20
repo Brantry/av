@@ -9,7 +9,6 @@ class Container
 {
     private static $container;
 
-
     public static function DI()
     {
         return self::$container;
@@ -24,5 +23,4 @@ class Container
     {
         return self::$container[$key];
     }
-
 }

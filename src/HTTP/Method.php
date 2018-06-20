@@ -14,7 +14,7 @@ class Method
     const PUT = 'PUT';
     const GET = 'GET';
     const POST = 'POST';
-    const PATCH = 'patch';
-    const DELETE  = 'delete';
-    const OPTIONS = 'options';
+    const PATCH = 'PATCH';
+    const DELETE = 'DELETE';
+    const OPTIONS = 'OPTIONS';
 }

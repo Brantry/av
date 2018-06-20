@@ -2,6 +2,7 @@
 
 namespace Av;
 
+use Av\Exception\AVException;
 use Av\Exception\UnknownParameter;
 use Klein\DataCollection\DataCollection;
 use Klein\Exceptions\UnhandledException;
@@ -159,6 +160,11 @@ abstract class Controller
         $instance->$action($parameters);
     }
 
+    /**
+     * @param $resource
+     * @return array
+     * @throws AVException
+     */
     private function getResource($resource): array
     {
         $controller = null;
@@ -166,21 +172,22 @@ abstract class Controller
         $params = array();
         if (!isset($resource['action'])) {
             $action = 'IndexAction';
-        } else if (isset($resource['action']) && strlen($resource["action"]) > 0) {
+        } else if (isset($resource['action']) && strlen($resource['action']) > 0) {
             $action = $resource["action"];
         }
 
-        if (isset($resource["controller"]) && strlen($resource["controller"]) > 0) {
-            $controller = "Av\Controller\\" . $resource["controller"];
+        if (isset($resource['controller']) && strlen($resource['controller']) > 0) {
+            $controller = "Av\Controller\\" . $resource['controller'];
 
         } else {
-            throw new \Exception('Can\'t initiate an empty controller');
+            throw new AVException('Can\'t initiate an empty controller');
         }
+
         /**
          * unset the unused variables so we can't send the rest of the params;
          */
-        unset($params["controller"]);
-        unset($params["action"]);
+        unset($params['controller']);
+        unset($params['action']);
 
         return [$controller, $action, $params];
     }
