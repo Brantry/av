@@ -15,7 +15,7 @@ class Request
 {
     public function getHeader($key)
     {
-        return $_SERVER['HTTP_' + \ucfirst($key)];
+        return $_SERVER['HTTP_' . \ucfirst($key)];
     }
 
     public function getOrDefault(string $key, string $filter = null, $default = null)
@@ -23,7 +23,9 @@ class Request
         if (isset($_GET[$key]) === false) return $default;
 
         $value = $_GET[$key];
-        $value = $this->sanitize($filter, $value);
+        if ($filter != null) {
+            $value = $this->sanitize($filter, $value);
+        }
         return $value;
     }
 
@@ -32,7 +34,9 @@ class Request
         if (isset($_POST[$key]) === false) return $default;
 
         $value = $_POST[$key];
-        $value = $this->sanitize($filter, $value);
+        if ($filter != null) {
+            $value = $this->sanitize($filter, $value);
+        }
 
         return $value;
     }
@@ -41,14 +45,11 @@ class Request
      * @param string $filter
      * @param $value
      * @return mixed
+     * @throws \Av\Exception\AVException
      */
-    private function sanitize(string $filter, $value): mixed
+    private function sanitize($filter, $value)
     {
-        if ($filter != null) {
-            $filter = new Filter($value);
-            $value = $filter->sanitize();
-        }
-        return $value;
+        return (new Filter($value))->sanitize($filter);
     }
 
 }
